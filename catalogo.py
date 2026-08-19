@@ -32,7 +32,15 @@ def agregar_marca():
     print("Marca agregada correctamente")
 
 
-agregar_marca()
+def ver_marcas():
+    print("\nCatalogo de maquillaje:")
 
-print("Catalogo actualizado:")
-print(catalogo_maquillaje)
+    for nombre, informacion in catalogo_maquillaje.items():
+        print("\nMarca:", nombre)
+        print("Fundadora:", informacion["fundadora"])
+        print("Pais:", informacion["pais"])
+        print("Cruelty free:", informacion["cruelty_free"])
+
+
+agregar_marca()
+ver_marcas()
