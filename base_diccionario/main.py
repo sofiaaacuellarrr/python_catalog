@@ -1,3 +1,6 @@
+
+from utils import read_db,save_db
+
 catalogo_maquillaje = {
     "Rare Beauty": {
         "fundadora": "Selena Gomez",
@@ -29,6 +32,7 @@ def agregar_marca():
         "cruelty_free": cruelty_free
     }
 
+    save_db(catalogo_maquillaje)
     print("Marca agregada correctamente")
 
 
