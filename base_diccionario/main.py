@@ -1,18 +1,6 @@
+from utils import read_db, save_db
 
-from utils import read_db,save_db
-
-catalogo_maquillaje = {
-    "Rare Beauty": {
-        "fundadora": "Selena Gomez",
-        "pais": "Estados Unidos",
-        "cruelty_free": True
-    },
-    "Fenty Beauty": {
-        "fundadora": "Rihanna",
-        "pais": "Estados Unidos",
-        "cruelty_free": True
-    }
-}
+catalogo_maquillaje = read_db()
 
 
 def agregar_marca():
@@ -37,13 +25,19 @@ def agregar_marca():
 
 
 def ver_marcas():
+    catalogo_actual = read_db()
+
     print("\nCatalogo de maquillaje:")
 
-    for nombre, informacion in catalogo_maquillaje.items():
-        print("\nMarca:", nombre)
-        print("Fundadora:", informacion["fundadora"])
-        print("Pais:", informacion["pais"])
-        print("Cruelty free:", informacion["cruelty_free"])
+    if catalogo_actual == {}:
+        print("No hay marcas guardadas")
+
+    else:
+        for nombre, informacion in catalogo_actual.items():
+            print("\nMarca:", nombre)
+            print("Fundadora:", informacion["fundadora"])
+            print("Pais:", informacion["pais"])
+            print("Cruelty free:", informacion["cruelty_free"])
 
 
 def modificar_marca():
@@ -59,11 +53,13 @@ def modificar_marca():
         if opcion == "1":
             nueva_fundadora = input("Nueva fundadora o fundador: ")
             catalogo_maquillaje[nombre]["fundadora"] = nueva_fundadora
+            save_db(catalogo_maquillaje)
             print("Fundadora modificada correctamente")
 
         elif opcion == "2":
             nuevo_pais = input("Nuevo pais: ")
             catalogo_maquillaje[nombre]["pais"] = nuevo_pais
+            save_db(catalogo_maquillaje)
             print("Pais modificado correctamente")
 
         elif opcion == "3":
@@ -74,6 +70,7 @@ def modificar_marca():
             else:
                 catalogo_maquillaje[nombre]["cruelty_free"] = False
 
+            save_db(catalogo_maquillaje)
             print("Cruelty free modificado correctamente")
 
         else:
@@ -108,4 +105,3 @@ while opcion != "4":
 
     else:
         print("Opcion incorrecta")
-        
